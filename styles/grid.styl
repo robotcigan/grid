@@ -1,0 +1,78 @@
+base = #188dfb
+
+rupture.scale = 450px 768px 992px 1200px
+rupture.scale-names = 'phone' 'tablet' 'notebook' 'desktop'
+
+*
+	box-sizing border-box
+	&:focus
+		outline 0
+
+img
+	max-width 100%
+
+a
+	color base
+	cursor pointer
+	text-decoration: none
+	transition color .2s
+	&:hover
+		text-decoration none
+		color base - 20%
+
+p
+	a
+		border-bottom: 1px solid rgba(base, 0.3)
+
+gutter = 15px
+
+.container
+	padding-right gutter
+	padding-left gutter
+	margin-right auto
+	margin-left auto
+	clearfix()
+	+above('tablet')
+		width 750px
+	+above('notebook')
+		width 970px
+	+above('desktop')
+		width 1170px
+
+
+// Отступ внутри .col
+.row
+	margin-right - gutter
+	margin-left - gutter
+	clearfix()
+
+
+// Цикл переберающий классы и дает ему цифру от 1 до 12
+for num in 1..12
+	.col-{num}
+		width round(100/(12/num),4%)
+		// 12/num инверсия 1..12 для получения нужного значения
+
+columns = '.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12'
+	{columns}
+		float left
+		min-height 1px
+		padding-right gutter
+		padding-left gutter
+		position relative
+		+below('phone')
+			width 100%
+
+for num in 1..12
+	.col-offset-{num}
+		margin-left round(100/(12/num),4%)
+
+*[hidden]
+*[hide],
+.hidden,
+.hide
+	display none
+
+*[disabled],
+.disabled
+	opacity 0.6
